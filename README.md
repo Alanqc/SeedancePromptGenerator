@@ -5,13 +5,13 @@
 当前状态：
 
 - 已完成文档版本化命名与详细设计文档整理
-- 已落地 `src/`、`tests/`、`private/` 基础文件框架
-- 项目可运行、可编译，但不包含业务功能
+- 已实现 Phase 1 MVP（Layer 1 + Layer 3，无 RAG）
+- 项目可运行、可编译，当前使用本地 mock 插件
 
 建议先阅读：
 
 - `docs/system-design-v1.md`
-- `docs/system-newdesign-v2.md`
+- `docs/system-design-v2.md`
 - `docs/system-detail-codesign.md`
 
 ## 运行

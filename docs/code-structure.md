@@ -8,7 +8,7 @@ SkillForVideoGen/
 ├── README.md
 ├── docs/
 │   ├── system-design-v1.md
-│   ├── system-newdesign-v2.md
+│   ├── system-design-v2.md
 │   ├── system-detail-codesign.md
 │   └── code-structure.md
 ├── llm-plugins/
