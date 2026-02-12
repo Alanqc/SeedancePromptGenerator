@@ -1,0 +1,5 @@
+Private/
+.DS_Store
+.env
+.env.*
+*.local
