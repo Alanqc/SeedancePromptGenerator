@@ -27,7 +27,7 @@
 
 - RAG/向量库检索
 - 多模态图片理解
-- 真实外部 API 调用（当前为本地 mock 插件）
+- 其他模型厂商接入（当前仅接入 Kimi）
 
 ## 4. 处理流程（MVP）
 
@@ -47,7 +47,7 @@
 - `src/core/prompt_generator.py`：Prompt 生成
 - `src/core/physics_validator.py`：物理校验
 - `src/llm_plugins/base_client.py`：插件抽象接口
-- `src/llm_plugins/kimi_client.py`：默认本地 mock 实现
+- `src/llm_plugins/kimi_client.py`：默认 Kimi 真实 API 实现
 
 ## 6. 输出约定
 

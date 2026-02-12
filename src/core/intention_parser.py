@@ -22,7 +22,7 @@ class Intention:
 
 
 class IntentionParser:
-    """Intent parser with local plugin fallback."""
+    """Intent parser with Kimi plugin."""
 
     def __init__(self) -> None:
         self.client = KimiClient()
@@ -38,6 +38,9 @@ class IntentionParser:
             technical_hints=list(payload.get("technical_hints", [])),
             needs_precise_params=bool(payload.get("needs_precise_params", False)),
             raw_input=str(payload.get("raw_input", user_input)),
-            metadata={"provider": "kimi", "mode": "local-mock"},
+            metadata={
+                "provider": "kimi",
+                "model": self.client.model,
+            },
         )
 
