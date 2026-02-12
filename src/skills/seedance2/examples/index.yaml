@@ -1,0 +1,7 @@
+examples:
+  - id: "ex_001"
+    path: "example_001/"
+    tags: ["placeholder"]
+    modalities: ["text"]
+    complexity: "low"
+
