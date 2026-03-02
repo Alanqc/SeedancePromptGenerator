@@ -128,6 +128,18 @@ class KimiClient(BaseClient):
         if not config_path.exists():
             return {}
 
+        # 归一化缩进：Tab 按 2 空格计，便于解析
+        def _indent(s: str) -> int:
+            n = 0
+            for c in s:
+                if c == " ":
+                    n += 1
+                elif c == "\t":
+                    n += 2
+                else:
+                    break
+            return n
+
         lines = config_path.read_text(encoding="utf-8").splitlines()
         in_kimi = False
         kimi_indent = -1
@@ -138,7 +150,7 @@ class KimiClient(BaseClient):
             if not content.strip():
                 continue
 
-            indent = len(content) - len(content.lstrip(" "))
+            indent = _indent(content)
             stripped = content.strip()
             if stripped == "kimi:":
                 in_kimi = True
@@ -151,7 +163,7 @@ class KimiClient(BaseClient):
 
             key, value = stripped.split(":", 1)
             key = key.strip()
-            value = value.strip().strip("'\"")
+            value = value.strip().strip("'\"").strip()
             if key in {"api_key", "model", "base_url"}:
                 result[key] = value
 
@@ -185,7 +197,17 @@ class KimiClient(BaseClient):
                 data = json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
             body = exc.read().decode("utf-8", errors="replace")
-            raise KimiAPIError(f"Kimi API 请求失败，HTTP {exc.code}: {body}") from exc
+            msg = f"Kimi API 请求失败，HTTP {exc.code}: {body}"
+            if exc.code == 401:
+                msg += (
+                    "\n认证失败(401) 请逐项检查：\n"
+                    "  1) Key 是否在对应平台创建并完整复制（仅显示一次）：\n"
+                    "     - 国内: https://platform.moonshot.cn → base_url 用 https://api.moonshot.cn/v1\n"
+                    "     - 海外: https://platform.moonshot.ai → base_url 用 https://api.moonshot.ai/v1\n"
+                    "  2) 控制台「项目管理」中该 Key 所在项目是否已启用所用模型（如 kimi-k2.5）。\n"
+                    "  3) 环境变量会覆盖配置文件，确认 KIMI_API_KEY / MOONSHOT_API_KEY 无误。"
+                )
+            raise KimiAPIError(msg) from exc
         except urllib.error.URLError as exc:
             raise KimiAPIError(f"Kimi API 网络错误: {exc}") from exc
 

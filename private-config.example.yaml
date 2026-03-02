@@ -1,0 +1,10 @@
+# 私有配置示例：复制到 private/config.yaml 并填入真实 Key
+# private/ 目录已被 .gitignore，不会被 commit/push
+#
+# 国内 Key（platform.moonshot.cn）用 base_url: https://api.moonshot.cn/v1
+# 海外 Key（platform.moonshot.ai）用 base_url: https://api.moonshot.ai/v1
+
+kimi:
+  api_key: "your-api-key-here"
+  model: "kimi-k2.5"
+  base_url: "https://api.moonshot.cn/v1"

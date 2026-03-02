@@ -1,5 +1,8 @@
+# 私有配置与本地数据，不提交、不 push（见 docs/system-detail-codesign.md 3.4）
 Private/
 private/
+/private/
+
 .DS_Store
 .env
 .env.*

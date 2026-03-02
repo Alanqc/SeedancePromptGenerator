@@ -33,7 +33,7 @@ export KIMI_BASE_URL="https://api.moonshot.cn/v1"
 说明：
 
 - `kimi-k2.5` 会自动携带 `thinking: {"type":"enabled"}`
-- 可直接在 `private/config.yaml` 填入 key（`api_key: "你的Key"`）
+- 可直接在 `private/config.yaml` 填入 key（`api_key: "你的Key"`）；可复制 `private-config.example.yaml` 到 `private/config.yaml`
 - 默认使用 `https://api.moonshot.cn/v1`（可用 `KIMI_BASE_URL` 覆盖）
 - 也兼容 `MOONSHOT_API_KEY` 环境变量名
 
