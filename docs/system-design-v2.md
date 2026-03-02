@@ -6,7 +6,7 @@
 
 - 用大模型将用户描述转换为结构化视频 Prompt
 - 架构保持模型可插拔（默认 Kimi，后续可替换）
-- Phase 1 先跑通主链路，不引入 RAG
+- Phase 1 先跑通主链路，不引入 PageIndex 离线版
 
 ## 2. 核心原则
 
@@ -25,7 +25,7 @@
 
 ### 不包含
 
-- RAG/向量库检索
+- PageIndex 离线版 / 向量库检索
 - 多模态图片理解
 - 其他模型厂商接入（当前仅接入 Kimi）
 
@@ -59,7 +59,7 @@
 
 ### Phase 2
 
-- 引入 tech-cache（仅精确参数与禁忌词）
+- 引入 tech-cache（**PageIndex 离线版**，仅精确参数与禁忌词；PageIndex 的模型使用 Kimi）
 - 增加 Skill 约束分层加载（Global/Domain/Model）
 
 ### Phase 3

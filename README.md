@@ -5,7 +5,7 @@
 当前状态：
 
 - 已完成文档版本化命名与详细设计文档整理
-- 已实现 Phase 1 MVP（Layer 1 + Layer 3，无 RAG）
+- 已实现 Phase 1 MVP（Layer 1 + Layer 3，无 PageIndex 离线版）
 - 已接入 Kimi 真实 API（默认 `kimi-k2.5` + thinking 模式）
 
 建议先阅读：
