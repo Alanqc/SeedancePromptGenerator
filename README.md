@@ -7,17 +7,29 @@
 - 已完成文档版本化命名与详细设计文档整理
 - 已实现 Phase 1 MVP（Layer 1 + Layer 3，无 PageIndex 离线版）
 - 已接入 Kimi 真实 API（默认 `kimi-k2.5` + thinking 模式）
+- 支持 **Skill 多角色协作**：在 skill 中配置 `roles.yaml`，多角色按序参与生成最终 Prompt（见 `src/skills/seedance2/roles.yaml`）
 
 建议先阅读：
 
 - `docs/system-design-v1.md`
 - `docs/system-design-v2.md`
+- `docs/system-design-v3.md`（多角色协作）
 - `docs/system-detail-codesign.md`
+
+## 依赖（多角色 skill 需要）
+
+```bash
+pip install -r requirements.txt   # 多角色需 PyYAML 解析 roles.yaml
+```
 
 ## 运行
 
 ```bash
 python3 -m src.main
+# 或带输入
+python3 -m src.main "拍一个赛博朋克雨夜场景，使用85mm镜头。"
+# 指定 skill（默认 seedance2，会加载该 skill 的 roles.yaml 做多角色生成）
+SKILL_NAME=seedance2 python3 -m src.main "你的描述"
 ```
 
 ## Kimi 配置

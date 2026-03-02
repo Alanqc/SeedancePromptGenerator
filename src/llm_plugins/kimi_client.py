@@ -60,6 +60,15 @@ class KimiClient(BaseClient):
             "raw_input": str(payload.get("raw_input", text)),
         }
 
+    def chat(self, system_prompt: str, user_content: str) -> str:
+        """单轮对话：system + user，返回 assistant 文本。用于多角色流水线等。"""
+        return self._chat_completion(
+            messages=[
+                {"role": "system", "content": (system_prompt or "").strip()},
+                {"role": "user", "content": (user_content or "").strip()},
+            ]
+        )
+
     def generate_prompt(self, intention_payload: Dict[str, Any]) -> str:
         return self._chat_completion(
             messages=[

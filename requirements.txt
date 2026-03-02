@@ -1,0 +1,2 @@
+# 多角色 skill 需解析 roles.yaml
+PyYAML>=5.4,<7

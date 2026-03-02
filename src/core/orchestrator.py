@@ -16,14 +16,19 @@ class RunResult:
     prompt_text: str
     negative_prompt: str
     validation_issues: list[str]
+    role_outputs: list[tuple[str, str]] = None  # (role_name, content)，多角色时有值
+
+    def __post_init__(self) -> None:
+        if self.role_outputs is None:
+            self.role_outputs = []
 
 
 class Orchestrator:
-    """Phase 1 orchestrator: Layer 1 + Layer 3 only."""
+    """Phase 1 orchestrator: Layer 1 + Layer 3 only；支持多角色 skill。"""
 
-    def __init__(self) -> None:
+    def __init__(self, skill_name: str = "seedance2") -> None:
         self.intention_parser = IntentionParser()
-        self.prompt_generator = PromptGenerator()
+        self.prompt_generator = PromptGenerator(skill_name=skill_name)
         self.physics_validator = PhysicsValidator()
 
     def run(self, user_input: str) -> RunResult:
@@ -39,5 +44,6 @@ class Orchestrator:
             prompt_text=prompt_result.prompt_text,
             negative_prompt=prompt_result.negative_prompt,
             validation_issues=validation.issues,
+            role_outputs=getattr(prompt_result, "role_outputs", []) or [],
         )
 
